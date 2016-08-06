@@ -22,3 +22,10 @@ export function toArray (target, start, end) {
 
     return result;
 };
+
+// throw error
+//
+// @param {String} message
+export function throwError (message) {
+    throw new Error(`knockout.filter: ${message}`);
+};

@@ -3,6 +3,7 @@
  *
  * new Node('key', 'value')
  */
+
 function Node (key = '', value = '') {
     this.key = key.trim();
     this.value = value.trim();

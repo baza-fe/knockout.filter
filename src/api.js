@@ -4,6 +4,9 @@
  * ko.filter('filter_name', filter);
  * ko.filters.filter_name(value);
  */
+
+import { throwError } from './util';
+
 const filters = {};
 
 function register (name, filter) {
@@ -13,11 +16,11 @@ function register (name, filter) {
     }
 
     if (!name) {
-        throw new Error('Filter name is required.');
+        throwError('Filter name is required.');
     }
 
     if (filters[name]) {
-        throw new Error(`Filter ${name} is registered.`);
+        throwError(`Filter ${name} is registered.`);
     }
 
     filters[name] = filter;

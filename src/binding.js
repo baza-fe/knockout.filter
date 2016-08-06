@@ -6,6 +6,7 @@
  */
 
 import Node from './node';
+import { throwError } from './util';
 import {
     CHAR_SINGLE,
     CHAR_DOUBLE,
@@ -139,7 +140,7 @@ function parse (s) {
     }
 
     if (paren !== 0 || curly !== 0 || square !== 0) {
-        throw new Error('knockout.filter: Syntax Error');
+        throwError('Syntax Error');
     }
 
     return rootNode;
