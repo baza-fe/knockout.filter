@@ -1,3 +1,8 @@
+/**
+ * AST tree node constructor
+ *
+ * new Node('key', 'value')
+ */
 function Node (key = '', value = '') {
     this.key = key.trim();
     this.value = value.trim();
@@ -7,8 +12,7 @@ function Node (key = '', value = '') {
 Node.prototype.add = function add (node) {
     this.children = this.children || [];
     this.children.push(node);
-    node.parent = this;
-    node.root = rootNode || this;
+    node.parent = node.root = this;
 };
 
 Node.prototype.toString = function toString() {
