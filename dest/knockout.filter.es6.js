@@ -21,6 +21,13 @@ function toArray(target, start, end) {
     return result;
 };
 
+// throw error
+//
+// @param {String} message
+function throwError(message) {
+    throw new Error(`knockout.filter: ${ message }`);
+};
+
 const CHAR_SINGLE = 0x27; // '
 const CHAR_DOUBLE = 0x22; // "
 const CHAR_LEFT_CURLY = 0x7b; // {
@@ -137,7 +144,7 @@ function parse(s) {
     }
 
     if (paren !== 0 || curly !== 0 || square !== 0) {
-        throw new Error('knockout.filter: Syntax Error');
+        throwError('Syntax Error');
     }
 
     return {
@@ -155,6 +162,7 @@ var filterParser = {
  *
  * new Node('key', 'value')
  */
+
 function Node(key = '', value = '') {
     this.key = key.trim();
     this.value = value.trim();
@@ -310,7 +318,7 @@ function parse$1(s) {
     }
 
     if (paren$1 !== 0 || curly$1 !== 0 || square$1 !== 0) {
-        throw new Error('knockout.filter: Syntax Error');
+        throwError('Syntax Error');
     }
 
     return rootNode;
@@ -406,12 +414,6 @@ ko.bindingProvider.instance.getBindingsString = function getBindingsString(node,
     return bindingsString;
 };
 
-/**
- * core api
- *
- * ko.filter('filter_name', filter);
- * ko.filters.filter_name(value);
- */
 const filters$1 = {};
 
 function register(name, filter) {
@@ -421,11 +423,11 @@ function register(name, filter) {
     }
 
     if (!name) {
-        throw new Error('Filter name is required.');
+        throwError('Filter name is required.');
     }
 
     if (filters$1[name]) {
-        throw new Error(`Filter ${ name } is registered.`);
+        throwError(`Filter ${ name } is registered.`);
     }
 
     filters$1[name] = filter;
