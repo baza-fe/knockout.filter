@@ -30,8 +30,11 @@ const CHAR_RIGHT_CURLY = 0x7d; // }
 const CHAR_LEFT_SQUARE = 0x5b; // [
 const CHAR_RIGHT_SQUARE = 0x5d; // ]
 const CHAR_LEFT_PAREN = 0x28; // (
-const CHAR_RIGHT_PAREN = 0x29; // (
+const CHAR_RIGHT_PAREN = 0x29; // )
 const CHAR_SLASH = 0x5c; // \
+const CHAR_COMMA = 0x2c; // ,
+const CHAR_COLON = 0x3a; // :
+const CHAR_Q_MARK = 0x3f; // ?
 const CHAR_PIPE = 0x7c; // |
 
 let filterTokenRe = /[^\s'"]+|'[^']*'|"[^"]*"/g;
@@ -149,6 +152,11 @@ var filterParser = {
     parse: parse
 };
 
+/**
+ * AST tree node constructor
+ *
+ * new Node('key', 'value')
+ */
 function Node(key = '', value = '') {
     this.key = key.trim();
     this.value = value.trim();
@@ -158,8 +166,7 @@ function Node(key = '', value = '') {
 Node.prototype.add = function add(node) {
     this.children = this.children || [];
     this.children.push(node);
-    node.parent = this;
-    node.root = rootNode || this;
+    node.parent = node.root = this;
 };
 
 Node.prototype.toString = function toString() {
@@ -181,19 +188,6 @@ Node.prototype.toString = function toString() {
     }
 };
 
-const CHAR_SINGLE$1 = 0x27; // '
-const CHAR_DOUBLE$1 = 0x22; // "
-const CHAR_LEFT_CURLY$1 = 0x7b; // {
-const CHAR_RIGHT_CURLY$1 = 0x7d; // }
-const CHAR_LEFT_SQUARE$1 = 0x5b; // [
-const CHAR_RIGHT_SQUARE$1 = 0x5d; // ]
-const CHAR_LEFT_PAREN$1 = 0x28; // (
-const CHAR_RIGHT_PAREN$1 = 0x29; // (
-const CHAR_SLASH$1 = 0x5c; // \
-const CHAR_COMMA = 0x2c; // ,
-const CHAR_COLON = 0x3a; // :
-const CHAR_Q_MARK = 0x3f; // ?
-
 let spaceRe = /\s/;
 let inSingle$1;
 let inDouble$1;
@@ -211,11 +205,12 @@ let lastIndex;
 let prev$1;
 let next;
 let c$1;
-let rootNode$1;
+let rootNode;
 let contextNode;
 function pushNode() {
     const node = new Node(contextKey, contextValue);
 
+    node.root = rootNode;
     contextNode.add(node);
     contextKey = contextValue = '';
     lastIndex = i$1 + 1;
@@ -224,8 +219,8 @@ function pushNode() {
 }
 
 function reset$1() {
-    rootNode$1 = new Node();
-    contextNode = rootNode$1;
+    rootNode = new Node();
+    contextNode = rootNode;
     inSingle$1 = inDouble$1 = inTernary = inChildContext = false;
     prev$1 = next = null;
     lastIndex = curly$1 = square$1 = paren$1 = 0;
@@ -251,16 +246,16 @@ function parse$1(s) {
         c$1 = str$1.charCodeAt(i$1);
 
         if (inSingle$1) {
-            if (c$1 === CHAR_SINGLE$1 && prev$1 !== CHAR_SLASH$1) {
+            if (c$1 === CHAR_SINGLE && prev$1 !== CHAR_SLASH) {
                 inSingle$1 = !inSingle$1;
             }
         } else if (inDouble$1) {
-            if (c$1 === CHAR_DOUBLE$1 && prev$1 !== CHAR_SLASH$1) {
+            if (c$1 === CHAR_DOUBLE && prev$1 !== CHAR_SLASH) {
                 inDouble$1 = !inDouble$1;
             }
-        } else if (c$1 === CHAR_SINGLE$1) {
+        } else if (c$1 === CHAR_SINGLE) {
             inSingle$1 = true;
-        } else if (c$1 === CHAR_DOUBLE$1) {
+        } else if (c$1 === CHAR_DOUBLE) {
             inDouble$1 = true;
         } else if (c$1 === CHAR_Q_MARK) {
             next = s[i$1 + 1].charCodeAt(0);
@@ -279,32 +274,32 @@ function parse$1(s) {
             } else {
                 lastIndex = i$1 + 1;
             }
-        } else if (c$1 === CHAR_LEFT_CURLY$1 && contextKey && peekBackFirstNoSpaceLetter() === CHAR_COLON) {
+        } else if (c$1 === CHAR_LEFT_CURLY && contextKey && peekBackFirstNoSpaceLetter() === CHAR_COLON) {
             inChildContext = !inChildContext;
             contextNode = pushNode();
-        } else if (c$1 === CHAR_RIGHT_CURLY$1 && contextKey && inChildContext) {
+        } else if (c$1 === CHAR_RIGHT_CURLY && contextKey && inChildContext) {
             inChildContext = !inChildContext;
             contextValue = str$1.slice(lastIndex, i$1);
             pushNode();
             contextNode = contextNode.parent;
         } else {
             switch (c$1) {
-                case CHAR_LEFT_PAREN$1:
+                case CHAR_LEFT_PAREN:
                     paren$1 += 1;
                     break;
-                case CHAR_RIGHT_PAREN$1:
+                case CHAR_RIGHT_PAREN:
                     paren$1 -= 1;
                     break;
-                case CHAR_LEFT_SQUARE$1:
+                case CHAR_LEFT_SQUARE:
                     square$1 += 1;
                     break;
-                case CHAR_RIGHT_SQUARE$1:
+                case CHAR_RIGHT_SQUARE:
                     square$1 -= 1;
                     break;
-                case CHAR_LEFT_CURLY$1:
+                case CHAR_LEFT_CURLY:
                     curly$1 += 1;
                     break;
-                case CHAR_RIGHT_CURLY$1:
+                case CHAR_RIGHT_CURLY:
                     curly$1 -= 1;
                     break;
             }
@@ -320,7 +315,7 @@ function parse$1(s) {
         throw new Error('knockout.filter: Syntax Error');
     }
 
-    return rootNode$1;
+    return rootNode;
 }
 
 function stringify(ast) {
