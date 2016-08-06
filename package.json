@@ -1,6 +1,6 @@
 {
   "name": "knockout.filter",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Observable filter for knockout.",
   "main": "dest/knockout.filter.cjs.js",
   "jsmain:next": "dest/knockout.filter.es6.js",
