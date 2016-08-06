@@ -1,5 +1,3 @@
-const undefined = undefined;
-
 // construct array from an array like object
 //
 // @param {ArrayLike} target
