@@ -372,7 +372,7 @@ function walkBindingNode(node, bindingContext) {
         node.root._modified = true;
         node.value = processBindingValue(node.value, bindingContext);
     } else if (node.children) {
-        ko.arrayForEach(node.children, function (node) {
+        ko.utils.arrayForEach(node.children, function (node) {
             walkBindingNode(node, bindingContext);
         });
     }
@@ -396,7 +396,7 @@ ko.bindingProvider.instance.preprocessNode = function preprocessNode(node) {
         return;
     }
 
-    ko.arrayForEach(node.attributes, attr => {
+    ko.utils.arrayForEach(node.attributes, attr => {
         if (matchObservableAttrName.test(attr.name)) {
             attr.value = processBindingValue(attr.value, null);
         }
