@@ -7,13 +7,13 @@
 function Node (key = '', value = '') {
     this.key = key.trim();
     this.value = value.trim();
-    this.children = null;
+    this.children = this.parent = this.root = null;
 }
 
 Node.prototype.add = function add (node) {
     this.children = this.children || [];
     this.children.push(node);
-    node.parent = node.root = this;
+    node.parent = this;
 };
 
 Node.prototype.toString = function toString() {
