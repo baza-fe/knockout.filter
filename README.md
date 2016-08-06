@@ -63,7 +63,7 @@ Use filter with arguments:
 
 ## Try
 
-[jsFiddle Demo](https://jsfiddle.net/differui/oeb0vkyg/1/)
+[jsFiddle Demo](https://jsfiddle.net/differui/rye50t76/1/)
 
 ## License
 
