@@ -1,5 +1,5 @@
 /*
- * Examples:
+ * examples:
  *
  * foo: bar, foo2: bar2
  * foo: bar, foo2: { foo3: bar3 }
