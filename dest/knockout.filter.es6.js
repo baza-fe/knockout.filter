@@ -5,13 +5,13 @@
 // @param {Number} end end index
 // @return {Array}
 function toArray(target, start, end) {
-    const len = target.length;
-    const result = [];
+    var len = target.length;
+    var result = [];
 
     start = start || 0;
     end = end === undefined ? len : end < 0 ? len + end : end;
 
-    let i = end - start;
+    var i = end - start;
 
     while (i > 0) {
         i = i - 1;
@@ -25,44 +25,44 @@ function toArray(target, start, end) {
 //
 // @param {String} message
 function throwError(message) {
-    throw new Error(`knockout.filter: ${ message }`);
+    throw new Error("knockout.filter: " + message);
 };
 
-const CHAR_SINGLE = 0x27; // '
-const CHAR_DOUBLE = 0x22; // "
-const CHAR_LEFT_CURLY = 0x7b; // {
-const CHAR_RIGHT_CURLY = 0x7d; // }
-const CHAR_LEFT_SQUARE = 0x5b; // [
-const CHAR_RIGHT_SQUARE = 0x5d; // ]
-const CHAR_LEFT_PAREN = 0x28; // (
-const CHAR_RIGHT_PAREN = 0x29; // )
-const CHAR_SLASH = 0x5c; // \
-const CHAR_COMMA = 0x2c; // ,
-const CHAR_COLON = 0x3a; // :
-const CHAR_Q_MARK = 0x3f; // ?
-const CHAR_PIPE = 0x7c; // |
+var CHAR_SINGLE = 0x27; // '
+var CHAR_DOUBLE = 0x22; // "
+var CHAR_LEFT_CURLY = 0x7b; // {
+var CHAR_RIGHT_CURLY = 0x7d; // }
+var CHAR_LEFT_SQUARE = 0x5b; // [
+var CHAR_RIGHT_SQUARE = 0x5d; // ]
+var CHAR_LEFT_PAREN = 0x28; // (
+var CHAR_RIGHT_PAREN = 0x29; // )
+var CHAR_SLASH = 0x5c; // \
+var CHAR_COMMA = 0x2c; // ,
+var CHAR_COLON = 0x3a; // :
+var CHAR_Q_MARK = 0x3f; // ?
+var CHAR_PIPE = 0x7c; // |
 
-let filterTokenRe = /[^\s'"]+|'[^']*'|"[^"]*"/g;
-let inSingle;
-let inDouble;
-let curly;
-let square;
-let paren;
-let str;
-let exp;
-let i;
-let len;
-let lastFilterIndex;
-let prev;
-let c;
-let filters = null;
+var filterTokenRe = /[^\s'"]+|'[^']*'|"[^"]*"/g;
+var inSingle = void 0;
+var inDouble = void 0;
+var curly = void 0;
+var square = void 0;
+var paren = void 0;
+var str = void 0;
+var exp = void 0;
+var i = void 0;
+var len = void 0;
+var lastFilterIndex = void 0;
+var prev = void 0;
+var c = void 0;
+var filters = null;
 
 function pushFilter() {
-    const currentExp = str.slice(lastFilterIndex, i).trim();
+    var currentExp = str.slice(lastFilterIndex, i).trim();
 
     if (currentExp) {
-        let tokens = null;
-        let filter = null;
+        var tokens = null;
+        var filter = null;
 
         tokens = currentExp.match(filterTokenRe);
         filter = {
@@ -163,58 +163,61 @@ var filterParser = {
  * new Node('key', 'value')
  */
 
-function Node(key = '', value = '') {
+function Node() {
+    var key = arguments.length <= 0 || arguments[0] === undefined ? '' : arguments[0];
+    var value = arguments.length <= 1 || arguments[1] === undefined ? '' : arguments[1];
+
     this.key = key.trim();
     this.value = value.trim();
-    this.children = null;
+    this.children = this.parent = this.root = null;
 }
 
 Node.prototype.add = function add(node) {
     this.children = this.children || [];
     this.children.push(node);
-    node.parent = node.root = this;
+    node.parent = this;
 };
 
 Node.prototype.toString = function toString() {
-    const key = this.key;
-    const value = this.value;
-    const children = this.children;
-    let childrenString = '';
+    var key = this.key;
+    var value = this.value;
+    var children = this.children;
+    var childrenString = '';
 
     if (key && value) {
-        return `${ key }: ${ value }`;
+        return key + ': ' + value;
     } else if (this.children) {
-        childrenString = children.map(node => {
+        childrenString = children.map(function (node) {
             return node.toString();
         }).join(', ');
 
-        return key ? `${ key }: { ${ childrenString } }` : childrenString;
+        return key ? key + ': { ' + childrenString + ' }' : childrenString;
     } else {
         return '';
     }
 };
 
-let spaceRe = /\s/;
-let inSingle$1;
-let inDouble$1;
-let inTernary;
-let inChildContext;
-let curly$1;
-let square$1;
-let paren$1;
-let str$1;
-let contextKey;
-let contextValue;
-let i$1;
-let len$1;
-let lastIndex;
-let prev$1;
-let next;
-let c$1;
-let rootNode;
-let contextNode;
+var spaceRe = /\s/;
+var inSingle$1 = void 0;
+var inDouble$1 = void 0;
+var inTernary = void 0;
+var inChildContext = void 0;
+var curly$1 = void 0;
+var square$1 = void 0;
+var paren$1 = void 0;
+var str$1 = void 0;
+var contextKey = void 0;
+var contextValue = void 0;
+var i$1 = void 0;
+var len$1 = void 0;
+var lastIndex = void 0;
+var prev$1 = void 0;
+var next = void 0;
+var c$1 = void 0;
+var rootNode = void 0;
+var contextNode = void 0;
 function pushNode() {
-    const node = new Node(contextKey, contextValue);
+    var node = new Node(contextKey, contextValue);
 
     node.root = rootNode;
     contextNode.add(node);
@@ -234,7 +237,7 @@ function reset$1() {
 }
 
 function peekBackFirstNoSpaceLetter() {
-    let j = i$1 - 1;
+    var j = i$1 - 1;
 
     while (j && spaceRe.test(str$1[j])) {
         j--;
@@ -333,18 +336,18 @@ var bindingParser = {
     stringify: stringify
 };
 
-const original = ko.bindingProvider.instance.getBindingsString;
+var original = ko.bindingProvider.instance.getBindingsString;
 
 function wrapFilterArg(arg) {
-    return `ko.unwrap(${ arg })`;
+    return 'ko.unwrap(' + arg + ')';
 }
 
 function processBindingValue(bindingValue, bindingContext) {
-    const result = filterParser.parse(bindingValue);
-    let filter = null;
-    let filterName = '';
-    let filterArgsString = '';
-    let filterArgs = null;
+    var result = filterParser.parse(bindingValue);
+    var filter = null;
+    var filterName = '';
+    var filterArgsString = '';
+    var filterArgs = null;
 
     if (result.filters) {
         while (filter = result.filters.shift()) {
@@ -358,9 +361,9 @@ function processBindingValue(bindingValue, bindingContext) {
             }
 
             if (ko.filters[filterName]) {
-                result.exp = `ko.filters.${ filterName }(${ filterArgsString })`;
+                result.exp = 'ko.filters.' + filterName + '(' + filterArgsString + ')';
             } else {
-                throw new Error(`Filter ${ filterName } is not unregistered.`);
+                throw new Error('Filter ' + filterName + ' is not unregistered.');
             }
         }
     }
@@ -380,7 +383,7 @@ function walkBindingNode(node, bindingContext) {
 }
 
 function processBindingsString(bindingsString, bindingContext) {
-    let ast = bindingParser.parse(bindingsString);
+    var ast = bindingParser.parse(bindingsString);
     walkBindingNode(ast, bindingContext);
 
     if (ast._modified) {
@@ -390,14 +393,14 @@ function processBindingsString(bindingsString, bindingContext) {
     return bindingsString;
 }
 
-const matchObservableAttrName = /^k-([\w\-]+)/i;
+var matchObservableAttrName = /^k-([\w\-]+)/i;
 
 ko.bindingProvider.instance.preprocessNode = function preprocessNode(node) {
     if (node.nodeType !== 1 || !node.attributes) {
         return;
     }
 
-    ko.utils.arrayForEach(node.attributes, attr => {
+    ko.utils.arrayForEach(node.attributes, function (attr) {
         if (matchObservableAttrName.test(attr.name)) {
             attr.value = processBindingValue(attr.value, null);
         }
@@ -414,7 +417,7 @@ ko.bindingProvider.instance.getBindingsString = function getBindingsString(node,
     return bindingsString;
 };
 
-const filters$1 = {};
+var filters$1 = {};
 
 function register(name, filter) {
     if (typeof name === 'function') {
@@ -427,7 +430,7 @@ function register(name, filter) {
     }
 
     if (filters$1[name]) {
-        throwError(`Filter ${ name } is registered.`);
+        throwError('Filter ' + name + ' is registered.');
     }
 
     filters$1[name] = filter;
