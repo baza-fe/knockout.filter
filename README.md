@@ -41,7 +41,7 @@ ko.applyBindings({
 Use filter in template:
 
 ```html
-<p data-bind="text：text | uppercase"></p>
+<p data-bind="text: text | uppercase"></p>
 ```
 
 ## Arguments
