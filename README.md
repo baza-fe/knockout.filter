@@ -11,7 +11,7 @@ npm install knockout.filter --save
 
 ```html
 <script src="knockout.3.4.0.js"></script>
-<script src="./node_modules/knockout.fitler/dist/knockout.filter.cjs.js"></script>
+<script src="./node_modules/knockout.fitler/dest/knockout.filter.cjs.js"></script>
 ```
 
 ## Syntax
@@ -60,6 +60,10 @@ Use filter with arguments:
 ```html
 <p data-bind="text: text | wrap '(' ')'"></p>
 ```
+
+## Try
+
+[jsFiddle Demo](https://jsfiddle.net/differui/oeb0vkyg/1/)
 
 ## License
 
