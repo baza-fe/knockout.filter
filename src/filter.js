@@ -8,17 +8,18 @@
  */
 
 import { toArray } from './util';
-
-const CHAR_SINGLE       = 0x27; // '
-const CHAR_DOUBLE       = 0x22; // "
-const CHAR_LEFT_CURLY   = 0x7b; // {
-const CHAR_RIGHT_CURLY  = 0x7d; // }
-const CHAR_LEFT_SQUARE  = 0x5b; // [
-const CHAR_RIGHT_SQUARE = 0x5d; // ]
-const CHAR_LEFT_PAREN   = 0x28; // (
-const CHAR_RIGHT_PAREN  = 0x29; // (
-const CHAR_SLASH        = 0x5c; // \
-const CHAR_PIPE         = 0x7c; // |
+import {
+    CHAR_SINGLE,
+    CHAR_DOUBLE,
+    CHAR_LEFT_CURLY,
+    CHAR_RIGHT_CURLY,
+    CHAR_LEFT_SQUARE,
+    CHAR_RIGHT_SQUARE,
+    CHAR_LEFT_PAREN,
+    CHAR_RIGHT_PAREN,
+    CHAR_SLASH,
+    CHAR_PIPE
+} from './tokens';
 
 let filterTokenRe = /[^\s'"]+|'[^']*'|"[^"]*"/g;
 let inSingle, inDouble, curly, square, paren;

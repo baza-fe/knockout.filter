@@ -6,19 +6,20 @@
  */
 
 import Node from './node';
-
-const CHAR_SINGLE       = 0x27; // '
-const CHAR_DOUBLE       = 0x22; // "
-const CHAR_LEFT_CURLY   = 0x7b; // {
-const CHAR_RIGHT_CURLY  = 0x7d; // }
-const CHAR_LEFT_SQUARE  = 0x5b; // [
-const CHAR_RIGHT_SQUARE = 0x5d; // ]
-const CHAR_LEFT_PAREN   = 0x28; // (
-const CHAR_RIGHT_PAREN  = 0x29; // (
-const CHAR_SLASH        = 0x5c; // \
-const CHAR_COMMA        = 0x2c; // ,
-const CHAR_COLON        = 0x3a; // :
-const CHAR_Q_MARK       = 0x3f; // ?
+import {
+    CHAR_SINGLE,
+    CHAR_DOUBLE,
+    CHAR_LEFT_CURLY,
+    CHAR_RIGHT_CURLY,
+    CHAR_LEFT_SQUARE,
+    CHAR_RIGHT_SQUARE,
+    CHAR_LEFT_PAREN,
+    CHAR_RIGHT_PAREN,
+    CHAR_SLASH,
+    CHAR_COMMA,
+    CHAR_COLON,
+    CHAR_Q_MARK
+} from './tokens'
 
 let spaceRe = /\s/;
 let inSingle, inDouble, inTernary, inChildContext, curly, square, paren;
@@ -29,6 +30,7 @@ let rootNode, contextNode;
 function pushNode () {
     const node = new Node(contextKey, contextValue);
 
+    node.root = rootNode;
     contextNode.add(node);
     contextKey = contextValue = '';
     lastIndex = i + 1;

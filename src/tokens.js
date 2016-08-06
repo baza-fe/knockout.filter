@@ -1,0 +1,13 @@
+export const CHAR_SINGLE       = 0x27; // '
+export const CHAR_DOUBLE       = 0x22; // "
+export const CHAR_LEFT_CURLY   = 0x7b; // {
+export const CHAR_RIGHT_CURLY  = 0x7d; // }
+export const CHAR_LEFT_SQUARE  = 0x5b; // [
+export const CHAR_RIGHT_SQUARE = 0x5d; // ]
+export const CHAR_LEFT_PAREN   = 0x28; // (
+export const CHAR_RIGHT_PAREN  = 0x29; // )
+export const CHAR_SLASH        = 0x5c; // \
+export const CHAR_COMMA        = 0x2c; // ,
+export const CHAR_COLON        = 0x3a; // :
+export const CHAR_Q_MARK       = 0x3f; // ?
+export const CHAR_PIPE         = 0x7c; // |
