@@ -1,10 +1,11 @@
 const rollup = require('rollup').rollup;
+const babelrc = require('babelrc-rollup').default;
 const babel = require('rollup-plugin-babel');
 
 rollup({
     entry: 'src/index',
     plugins: [
-        babel()
+        babel(babelrc())
     ]
 }).then(function (bundle) {
     bundle.write({
@@ -12,7 +13,7 @@ rollup({
         format: 'cjs'
     });
     bundle.write({
-        dest: 'dest/knockout.filter.es6.js',
-        format: 'es6'
+        dest: 'dest/knockout.filter.es.js',
+        format: 'es'
     });
 }).catch(console.error);
