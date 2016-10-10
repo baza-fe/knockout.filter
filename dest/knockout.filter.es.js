@@ -19,14 +19,14 @@ function toArray(target, start, end) {
     }
 
     return result;
-};
+}
 
 // throw error
 //
 // @param {String} message
 function throwError(message) {
     throw new Error("knockout.filter: " + message);
-};
+}
 
 var CHAR_SINGLE = 0x27; // '
 var CHAR_DOUBLE = 0x22; // "
@@ -41,6 +41,15 @@ var CHAR_COMMA = 0x2c; // ,
 var CHAR_COLON = 0x3a; // :
 var CHAR_Q_MARK = 0x3f; // ?
 var CHAR_PIPE = 0x7c; // |
+
+/*
+ * examples:
+ *
+ * hello | uppercase
+ * hello | uppercase | wrap '(' ')'
+ * function () { return hello } | uppercase
+ * function () { return 'hello' } | uppercase
+ */
 
 var filterTokenRe = /[^\s'"]+|'[^']*'|"[^"]*"/g;
 var inSingle = void 0;
@@ -197,6 +206,13 @@ Node.prototype.toString = function toString() {
     }
 };
 
+/*
+ * examples:
+ *
+ * foo: bar, foo2: bar2
+ * foo: bar, foo2: { foo3: bar3 }
+ */
+
 var spaceRe = /\s/;
 var inSingle$1 = void 0;
 var inDouble$1 = void 0;
@@ -216,6 +232,7 @@ var next = void 0;
 var c$1 = void 0;
 var rootNode = void 0;
 var contextNode = void 0;
+
 function pushNode() {
     var node = new Node(contextKey, contextValue);
 
@@ -336,6 +353,13 @@ var bindingParser = {
     stringify: stringify
 };
 
+/**
+ * override original knockout binding provider
+ *
+ * bindingProvider.instance.preprocessNode
+ * bindingProvider.instance.getBindingsString
+ */
+
 var original = ko.bindingProvider.instance.getBindingsString;
 
 function wrapFilterArg(arg) {
@@ -416,6 +440,13 @@ ko.bindingProvider.instance.getBindingsString = function getBindingsString(node,
 
     return bindingsString;
 };
+
+/**
+ * core api
+ *
+ * ko.filter('filter_name', filter);
+ * ko.filters.filter_name(value);
+ */
 
 var filters$1 = {};
 
