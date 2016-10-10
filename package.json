@@ -1,6 +1,6 @@
 {
   "name": "knockout.filter",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Data pipe plugin for Knockout.js",
   "main": "dest/knockout.filter.iife.js",
   "jsmain:next": "dest/knockout.filter.es.js",

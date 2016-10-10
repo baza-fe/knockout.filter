@@ -10,6 +10,7 @@ rollup({
 }).then(function (bundle) {
     bundle.write({
         dest: 'dest/knockout.filter.iife.js',
+        moduleName: 'knockout.fitler',
         format: 'iife'
     });
     bundle.write({

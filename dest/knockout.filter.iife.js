@@ -1,3 +1,4 @@
+this.knockout = this.knockout || {};
 (function () {
 'use strict';
 
