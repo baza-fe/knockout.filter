@@ -9,8 +9,8 @@ rollup({
     ]
 }).then(function (bundle) {
     bundle.write({
-        dest: 'dest/knockout.filter.cjs.js',
-        format: 'cjs'
+        dest: 'dest/knockout.filter.iife.js',
+        format: 'iife'
     });
     bundle.write({
         dest: 'dest/knockout.filter.es.js',

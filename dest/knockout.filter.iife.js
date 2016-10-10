@@ -1,3 +1,4 @@
+(function () {
 'use strict';
 
 // construct array from an array like object
@@ -471,3 +472,5 @@ function register(name, filter) {
 
 ko.filter = register;
 ko.filters = filters$1;
+
+}());
