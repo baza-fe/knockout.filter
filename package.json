@@ -1,9 +1,9 @@
 {
   "name": "knockout.filter",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Data pipe plugin for Knockout.js",
   "main": "dest/knockout.filter.iife.js",
-  "jsmain:next": "dest/knockout.filter.es.js",
+  "jsmain:next": "dest/knockout.filter.js",
   "scripts": {
     "build": "node build/build.js",
     "pretest": "npm run build",

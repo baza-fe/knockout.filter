@@ -1,3 +1,7 @@
+this.knockout = this.knockout || {};
+(function () {
+'use strict';
+
 // construct array from an array like object
 //
 // @param {ArrayLike} target
@@ -173,8 +177,8 @@ var filterParser = {
  */
 
 function Node() {
-    var key = arguments.length <= 0 || arguments[0] === undefined ? '' : arguments[0];
-    var value = arguments.length <= 1 || arguments[1] === undefined ? '' : arguments[1];
+    var key = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+    var value = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
 
     this.key = key.trim();
     this.value = value.trim();
@@ -469,3 +473,5 @@ function register(name, filter) {
 
 ko.filter = register;
 ko.filters = filters$1;
+
+}());

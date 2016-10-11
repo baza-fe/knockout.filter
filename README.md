@@ -11,7 +11,7 @@ npm install knockout.filter --save
 
 ```html
 <script src="knockout.3.4.0.js"></script>
-<script src="./node_modules/knockout.fitler/dest/knockout.filter.cjs.js"></script>
+<script src="./node_modules/knockout.fitler/dest/knockout.filter.js"></script>
 ```
 
 ## Syntax
