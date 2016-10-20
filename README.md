@@ -84,7 +84,7 @@ Use filter with arguments:
 
 ## Try
 
-[jsFiddle Demo](https://jsfiddle.net/differui/rye50t76/1/)
+[jsFiddle Demo](https://jsfiddle.net/rye50t76/2/)
 
 ## License
 
