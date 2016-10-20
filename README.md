@@ -1,6 +1,27 @@
 knockout.filter
 =====
 
+<p>
+    <a href="LICENSE">
+        <img src="https://img.shields.io/badge/license-MIT-brightgreen.svg" alt="Software License" />
+    </a>
+    <a href="https://github.com/baza-fe/knockout.filter/issues">
+        <img src="https://img.shields.io/github/issues/baza-fe/knockout.filter.svg" alt="Issues" />
+    </a>
+    <a href="http://standardjs.com/">
+        <img src="https://img.shields.io/badge/code%20style-standard-brightgreen.svg" alt="JavaScript Style Guide" />
+    </a>
+    <a href="https://npmjs.org/package/knockout.filter">
+        <img src="https://img.shields.io/npm/v/knockout.filter.svg?style=flat-squar" alt="NPM" />
+    </a>
+    <a href="https://github.com/baza-fe/knockout.filter/releases">
+        <img src="https://img.shields.io/github/release/baza-fe/knockout.filter.svg" alt="Latest Version" />
+    </a>
+    <a href="https://travis-ci.org/baza-fe/knockout.filter">
+        <img src="https://travis-ci.org/baza-fe/knockout.filter.svg?branch=master" />
+    </a>
+</p>
+
 ## Usage
 
 Install from NPM:
